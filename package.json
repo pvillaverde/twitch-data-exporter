@@ -1,0 +1,26 @@
+{
+	"name": "twitch_data_exporter",
+	"version": "0.0.1",
+	"description": "Twitch Helix API Exporter to PostgreSQL",
+	"main": "app/index.js",
+	"scripts": {
+		"start": "node app/index.js",
+		"debug": "node --inspect app/index.js",
+		"debug-brk": "node --inspect --inspect-brk app/index.js"
+	},
+	"keywords": [
+		"twitch",
+		"api",
+		"exporter",
+		"grafana",
+		"postgresql",
+		"streaming",
+		"analytics"
+	],
+	"author": "Pablo Villaverde Castro",
+	"license": "MIT",
+	"dependencies": {
+		"node-cron": "^3.0.0",
+		"pg": "^8.5.1"
+	}
+}

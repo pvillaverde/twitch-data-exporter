@@ -1,0 +1,73 @@
+{
+    "data": [
+        {
+            "id": "41937144238",
+            "user_id": "653636102",
+            "user_login": "baleavermella",
+            "user_name": "BaleaVermella",
+            "game_id": "417752",
+            "game_name": "Talk Shows & Podcasts",
+            "type": "live",
+            "title": "O nesgo de xénero na ciencia",
+            "viewer_count": 8,
+            "started_at": "2021-03-10T19:27:50Z",
+            "language": "pt",
+            "thumbnail_url": "https://static-cdn.jtvnw.net/previews-ttv/live_user_baleavermella-{width}x{height}.jpg",
+            "tag_ids": [
+                "39ee8140-901a-4762-bfca-8260dea1310f"
+            ]
+        },
+        {
+            "id": "41378580012",
+            "user_id": "599386777",
+            "user_login": "recunchogamer",
+            "user_name": "RecunchoGamer",
+            "game_id": "19443126",
+            "game_name": "Capcom Arcade Stadium",
+            "type": "live",
+            "title": "Repasamos recreativas de Capcom (3/3)",
+            "viewer_count": 6,
+            "started_at": "2021-03-10T19:30:00Z",
+            "language": "pt",
+            "thumbnail_url": "https://static-cdn.jtvnw.net/previews-ttv/live_user_recunchogamer-{width}x{height}.jpg",
+            "tag_ids": [
+                "39ee8140-901a-4762-bfca-8260dea1310f"
+            ]
+        },
+        {
+            "id": "41378924828",
+            "user_id": "611617823",
+            "user_login": "clankirfed",
+            "user_name": "ClanKirfed",
+            "game_id": "27471",
+            "game_name": "Minecraft",
+            "type": "live",
+            "title": "Eiras e Ferrados e 3x1 en granxas! | Galego",
+            "viewer_count": 5,
+            "started_at": "2021-03-10T19:55:45Z",
+            "language": "es",
+            "thumbnail_url": "https://static-cdn.jtvnw.net/previews-ttv/live_user_clankirfed-{width}x{height}.jpg",
+            "tag_ids": [
+                "d4bb9c58-2141-4881-bcdc-3fe0505457d1"
+            ]
+        },
+        {
+            "id": "41377450588",
+            "user_id": "445012108",
+            "user_login": "reisvas",
+            "user_name": "Reisvas",
+            "game_id": "509658",
+            "game_name": "Just Chatting",
+            "type": "live",
+            "title": "Apaixoante, único, irreverente. -The New York Times // !Discord // #TwitchEnGalego",
+            "viewer_count": 2,
+            "started_at": "2021-03-10T18:05:53Z",
+            "language": "es",
+            "thumbnail_url": "https://static-cdn.jtvnw.net/previews-ttv/live_user_reisvas-{width}x{height}.jpg",
+            "tag_ids": [
+                "d4bb9c58-2141-4881-bcdc-3fe0505457d1"
+            ]
+        }
+    ],
+    "pagination": {}
+}
