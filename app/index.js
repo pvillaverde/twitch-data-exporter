@@ -1,6 +1,5 @@
-const config = require('./config');
-const cron = require('node-cron');
 const StorageManagerService = require('./services/storageManager.service.js');
+const CronService = require('./services/cron.service');
 
 function bootstrapApp() {
 	console.log(' ');
@@ -11,11 +10,7 @@ function bootstrapApp() {
 	console.log(' ----------------------------------');
 	console.log(' ');
 	StorageManagerService.init();
-
-	cron.schedule('* * * * *', function () {
-		console.log('running a task every minute');
-		StorageManagerService.getUsers().then((users) => console.log(users[0]));
-	});
+	CronService.init();
 }
 
 bootstrapApp();

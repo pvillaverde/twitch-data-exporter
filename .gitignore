@@ -1,4 +1,5 @@
 /node_modules/
+/app/security/
 config.js
 token.json
 /*.log

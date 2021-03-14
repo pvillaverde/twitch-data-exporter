@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS stream (
     title varchar(255),
     viewer_count bigint,
     started_at timestamp NOT NULL,
+	ended_at timestamp,
     language varchar
 (255),
     PRIMARY KEY (id)
