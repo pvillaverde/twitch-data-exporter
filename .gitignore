@@ -2,4 +2,5 @@
 /app/security/
 config.js
 token.json
+/exemplos/
 /*.log

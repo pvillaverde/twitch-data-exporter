@@ -9,12 +9,15 @@ class CronService {
 		this.channelNames = [];
 		this.channelIds = [];
 		this.fetchUsers();
-		cron.schedule('0 1 * * *', () => this.fetchUsers());
-		cron.schedule('* * * * *', () => this.fetchStreams());
-		cron.schedule('0 2 * * 0', () => this.fetchFollows());
+		this.fetchGames();
+		cron.schedule(config.cron.fetchUsers, () => this.fetchUsers());
+		cron.schedule(config.cron.fetchClips, () => this.fetchClips());
+		cron.schedule(config.cron.fetchGames, () => this.fetchGames());
+		cron.schedule(config.cron.fetchFollows, () => this.fetchFollows());
+		cron.schedule(config.cron.fetchStreams, () => this.fetchStreams());
 	}
 	static async getChannelNames() {
-		let channels = config.twitch_channels ? config.twitch_channels.split(',') : null;
+		let channels = config.twitch.channels ? config.twitch.channels.split(',') : null;
 
 		if (channels && channels.length) {
 			const channelNames = channels.map((channelName) => channelName.toLowerCase());
@@ -56,6 +59,18 @@ class CronService {
 			await TwitchHelixApiService.fetchFollows(id);
 		}
 		console.log('[CronService]', 'Actualizados Follows');
+	}
+	static async fetchClips() {
+		for (const id of this.channelIds) {
+			await TwitchHelixApiService.fetchClips(id);
+		}
+		console.log('[CronService]', 'Actualizados Clips');
+	}
+	static async fetchGames() {
+		const gameIds = (await StorageManagerService.getMissingGames()).map((g) => g.game_id);
+		if (!gameIds.length) return;
+		await TwitchHelixApiService.fetchGames(gameIds);
+		console.log('[CronService]', 'Actualizados Xogos');
 	}
 }
 
