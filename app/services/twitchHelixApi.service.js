@@ -22,7 +22,7 @@ class TwitchHelixApiService {
 		return {
 			baseURL: 'https://api.twitch.tv/helix/',
 			headers: {
-				'Client-ID': config.twitch_client_id,
+				'Client-ID': config.twitch.clientId,
 				Authorization: `Bearer ${oauthBearer}`,
 			},
 		};
@@ -37,7 +37,7 @@ class TwitchHelixApiService {
 		// https://dev.twitch.tv/docs/authentication/getting-tokens-oauth
 		return axios
 			.post(
-				`https://id.twitch.tv/oauth2/token?client_id=${config.twitch_client_id}&client_secret=${config.twitch_client_secret}&grant_type=client_credentials`
+				`https://id.twitch.tv/oauth2/token?client_id=${config.twitch.clientId}&client_secret=${config.twitch.clientSecret}&grant_type=client_credentials`
 			)
 			.then((res) => {
 				fs.writeFileSync(this.tokenPath, JSON.stringify(res.data));
@@ -75,7 +75,7 @@ class TwitchHelixApiService {
 	static fetchGames(gameIds) {
 		return axios
 			.get(`/games?id=${gameIds.join('&id=')}`, this.requestOptions)
-			.then((res) => res.data.data || [])
+			.then((res) => StorageManagerService.saveGames(res.data.data || []))
 			.catch((err) => {
 				if (err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchGames(gameIds));
@@ -89,7 +89,7 @@ class TwitchHelixApiService {
 		// Xestionar pagination cursor
 		const pagination = cursor ? `&after=${cursor}` : '';
 		return axios
-			.get(`/users/follows?to_id=${channelId}${pagination}`, this.requestOptions)
+			.get(`/users/follows?to_id=${channelId}&first=100${pagination}`, this.requestOptions)
 			.then((res) => {
 				if (res.data.pagination.cursor) {
 					return this.fetchFollows(channelId, res.data.pagination.cursor, (res.data.data || []).concat(follows || []));
@@ -106,11 +106,18 @@ class TwitchHelixApiService {
 			});
 	}
 
-	static fetchClips(broadcasterId) {
+	static fetchClips(broadcasterId, cursor, clips) {
 		// Xestionar pagination cursor
+		const pagination = cursor ? `&after=${cursor}` : '';
 		return axios
-			.get(`/clips?broadcaster_id=${broadcasterId}`, this.requestOptions)
-			.then((res) => res.data.data || [])
+			.get(`/clips?broadcaster_id=${broadcasterId}&first=100${pagination}`, this.requestOptions)
+			.then((res) => {
+				if (res.data.pagination.cursor) {
+					return this.fetchClips(broadcasterId, res.data.pagination.cursor, (res.data.data || []).concat(clips || []));
+				} else {
+					return StorageManagerService.saveClips((res.data.data || []).concat(clips || []));
+				}
+			})
 			.catch((err) => {
 				if (err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchClips(broadcasterId));

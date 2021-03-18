@@ -34,8 +34,8 @@ class StorageManagerService {
 		return this.database.saveGames(data);
 	}
 
-	static async getUsers() {
-		return this.database.test();
+	static async getMissingGames() {
+		return this.database.getMissingGames();
 	}
 
 	handleError(error) {
