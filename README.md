@@ -69,7 +69,7 @@ Project is build on node and uses many npm packages, You need to set up:
 2. (Optional) Setup a Google Sheets App if you want to retrieve channels from a spreadsheed. Follow the [Node Quickstart Guide](https://developers.google.com/sheets/api/quickstart/nodejs) to download `credentials.json`.
 2. Clone the repository
    ```sh
-   git clone [project-url]
+   git clone https://github.com/pvillaverde/twitch-data-exporter
    ```
 3. Install NPM packages dependencies
    ```sh
@@ -124,7 +124,7 @@ fetchUsers: '0 1 * * *', // User Channels and total views will be refreshed ever
 fetchClips: '0 2 * * *', // Channel Clips will be refreshed every day at 2AM
 fetchGames: '0 3 * * *', // Missing Games from the database will be fetched every day at 3AM
 fetchFollows: '0 4 * * *', // Channel followers will be refreshed every dat at 4AM
-fetchStreams: '* * * * *', // Every minute will check if there's someone on stream and get the viewers count.
+fetchStreams: '* * * * *', // Every minute will who's someone on stream and viewers count.
 ```
 
 These intervals can be customized using the cron syntax:

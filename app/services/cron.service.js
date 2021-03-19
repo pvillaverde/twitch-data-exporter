@@ -33,7 +33,7 @@ class CronService {
 				}
 			});
 			if (!channelNames.length) {
-				throw console.warn('[CronService]', 'No channels configured');
+				throw console.warn(new Date().toISOString(), '[CronService]', 'No channels configured');
 			}
 			return channelNames;
 		} catch (error) {
@@ -45,12 +45,13 @@ class CronService {
 		this.channelNames = await this.getChannelNames();
 		TwitchHelixApiService.fetchUsers(this.channelNames).then((users) => {
 			this.channelIds = users.map((u) => u.id);
-			console.log('[CronService]', 'Actualizados usuarios');
+			console.log(new Date().toISOString(), '[CronService]', 'Actualizados usuarios');
 		});
 	}
 	static async fetchStreams() {
 		TwitchHelixApiService.fetchStreams(this.channelNames).then((streams) => {
-			if (streams.length) console.log('[CronService]', 'Actualizados Streamings', streams.map((s) => s.user_name).join(','));
+			if (streams.length)
+				console.log(new Date().toISOString(), '[CronService]', 'Actualizados Streamings', streams.map((s) => s.user_name).join(','));
 		});
 	}
 	static async fetchFollows() {
@@ -58,19 +59,19 @@ class CronService {
 		for (const id of this.channelIds) {
 			await TwitchHelixApiService.fetchFollows(id);
 		}
-		console.log('[CronService]', 'Actualizados Follows');
+		console.log(new Date().toISOString(), '[CronService]', 'Actualizados Follows');
 	}
 	static async fetchClips() {
 		for (const id of this.channelIds) {
 			await TwitchHelixApiService.fetchClips(id);
 		}
-		console.log('[CronService]', 'Actualizados Clips');
+		console.log(new Date().toISOString(), '[CronService]', 'Actualizados Clips');
 	}
 	static async fetchGames() {
 		const gameIds = (await StorageManagerService.getMissingGames()).map((g) => g.game_id);
 		if (!gameIds.length) return;
 		await TwitchHelixApiService.fetchGames(gameIds);
-		console.log('[CronService]', 'Actualizados Xogos');
+		console.log(new Date().toISOString(), '[CronService]', 'Actualizados Xogos');
 	}
 }
 
