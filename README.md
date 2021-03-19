@@ -1,6 +1,6 @@
 # Twitch Data Exporter
 
-[![GitHub license][license-shield]]([license-url])
+[![GitHub license][license-shield]][license-url]
 
 
 <!-- TABLE OF CONTENTS, generated with gh-md-toc README.md -->
@@ -40,7 +40,7 @@ The implemented storages as of now are the following:
 
 * [PostgreSQL](https://www.postgresql.org/)
 
-Miss the one you wanted? [Request a feature]([project-url]/issues) or consider [contributing](#contributing) to the project!
+Miss the one you wanted? [Request a feature][issues-url] or consider [contributing](#contributing) to the project!
 ### Built With
 
 * [NodeJS](https://nodejs.org/es/)
@@ -143,7 +143,7 @@ These intervals can be customized using the cron syntax:
 
 ## Roadmap
 
-Check out the [open issues]([project-url]/issues) page for a list of proposed features (and known issues).
+Check out the [open issues][issues-url] page for a list of proposed features (and known issues).
 
 
 <!-- CONTRIBUTING -->
@@ -177,7 +177,7 @@ Pablo Villaverde Castro - [@clankirfed](https://twitter.com/clankirfed)
 ## License
 
 
-[![GitHub license]([license-shield])]([license-url])
+[![GitHub license][license-shield]][license-url]
 
 Distributed under the GNU GPL-v3 License. See `LICENSE` for more information.
 
@@ -187,3 +187,4 @@ Distributed under the GNU GPL-v3 License. See `LICENSE` for more information.
 [license-shield]: https://img.shields.io/badge/license-GNU%20GPL--v3-brightgreen
 [license-url]: https://github.com/pvillaverde/twitch-data-exporter/blob/master/LICENSE
 [project-url]: https://github.com/pvillaverde/twitch-data-exporter
+[issues-url]: https://github.com/pvillaverde/twitch-data-exporter/issues
