@@ -8,6 +8,7 @@ class PostgresqlService {
 		const initSQL = fs.readFileSync('app/data/postgresql-tables.sql').toString();
 		await this.pool.query(initSQL);
 		console.debug('[PostgresqlService]', 'Base de datos inicializada.');
+		return;
 	}
 
 	static async saveUsers(users) {

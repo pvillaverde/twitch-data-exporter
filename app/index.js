@@ -5,7 +5,7 @@ const CronService = require('./services/cron.service');
 const fs = require('fs');
 const config = require('./config.js');
 
-function bootstrapApp() {
+async function bootstrapApp() {
 	console.log(' ');
 	console.log(' ----------------------------------');
 	console.log('|     Twitch Data Exporter         |');
@@ -19,7 +19,7 @@ function bootstrapApp() {
 		} catch (error) {}
 		GoogleSheetsApiService.authorize();
 	} else {
-		StorageManagerService.init();
+		await StorageManagerService.init();
 		CronService.init();
 	}
 }

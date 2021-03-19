@@ -97,7 +97,7 @@ Project is build on node and uses many npm packages, You need to set up:
 7. If you want to launch a docker, once you have all setup and ready, build the image and run it with:
    ```sh
    docker build -t pvillaverde/twitch-data-exporter .
-   docker run --name Twitch-Data-Exporter  -d pvillaverde/twitch-data-exporter
+   docker run --name twitch-data-exporter  -d pvillaverde/twitch-data-exporter
    ```
 
 <!-- USAGE EXAMPLES -->

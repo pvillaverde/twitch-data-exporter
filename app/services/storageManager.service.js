@@ -8,7 +8,7 @@ class StorageManagerService {
 				this.database = PostgresqlService;
 				break;
 		}
-		this.database.init();
+		return this.database.init();
 	}
 
 	static async saveUsers(data) {
