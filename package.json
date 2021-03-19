@@ -1,7 +1,7 @@
 {
 	"name": "twitch_data_exporter",
 	"version": "0.0.1",
-	"description": "Twitch Helix API Exporter to PostgreSQL",
+	"description": "Twitch API Data Exporter",
 	"main": "app/index.js",
 	"scripts": {
 		"start": "node app/index.js",

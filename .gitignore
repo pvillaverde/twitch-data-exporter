@@ -1,6 +1,6 @@
 /node_modules/
 /app/security/
-config.js
+/app/config.js
 token.json
 /exemplos/
 /*.log
