@@ -93,7 +93,12 @@ Project is build on node and uses many npm packages, You need to set up:
 		}
 	},
 	```
-6. Start the app by runing `npm start` or `node app/index.js`
+6. Start the app by runing `npm start` or `node app/index.js` and follow the steps for google Api auth if you are using spreadsheets.
+7. If you want to launch a docker, once you have all setup and ready, build the image and run it with:
+   ```sh
+   docker build -t pvillaverde/twitch-data-exporter .
+   docker run --name Twitch-Data-Exporter  -d pvillaverde/twitch-data-exporter
+   ```
 
 <!-- USAGE EXAMPLES -->
 
@@ -114,16 +119,12 @@ As you have seen previously, you can choose how the app learns which channels to
 Lastly, you can choose when to retrieve each data on the `cron` option of `config.js`, by default it is setup like this:
 
 ```JS
-{
-	cron: {
-		// Minutes Hours DayOfMonth Month DayOfWeek
-		fetchUsers: '0 1 * * *', // User Channels and total views will be refreshed every day at 1AM
-		fetchClips: '0 2 * * *', // Channel Clips will be refreshed every day at 2AM
-		fetchGames: '0 3 * * *', // Missing Games from the database will be fetched every day at 3AM
-		fetchFollows: '0 4 * * *', // Channel followers will be refreshed every dat at 4AM
-		fetchStreams: '* * * * *', // Every minute will check if there's someone on stream and get the viewers count.
-	},
-};
+// Minutes Hours DayOfMonth Month DayOfWeek
+fetchUsers: '0 1 * * *', // User Channels and total views will be refreshed every day at 1AM
+fetchClips: '0 2 * * *', // Channel Clips will be refreshed every day at 2AM
+fetchGames: '0 3 * * *', // Missing Games from the database will be fetched every day at 3AM
+fetchFollows: '0 4 * * *', // Channel followers will be refreshed every dat at 4AM
+fetchStreams: '* * * * *', // Every minute will check if there's someone on stream and get the viewers count.
 ```
 
 These intervals can be customized using the cron syntax:
@@ -169,6 +170,8 @@ Pablo Villaverde Castro - [@clankirfed](https://twitter.com/clankirfed)
 * [Google Sheets API](https://developers.google.com/sheets/api/quickstart/nodejs)
 * [How to use Node Cron](https://www.digitalocean.com/community/tutorials/nodejs-cron-jobs-by-examples)
 * [TOC Generator](https://github.com/ekalinin/github-markdown-toc)
+* [Dockerizing NodeJs WebApp](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+* [Building Efficient NodeJS DockerFiles](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/)
 
 
 ## License
