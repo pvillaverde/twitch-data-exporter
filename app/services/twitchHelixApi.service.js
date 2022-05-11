@@ -64,27 +64,59 @@ class TwitchHelixApiService {
 	}
 
 	static fetchUsers(channelNames) {
+		const maxPerRequest = 100;
+		const requestsChannels = channelNames.reduce((resultArray, item, index) => {
+			const chunkIndex = Math.floor(index / maxPerRequest);
+			if (!resultArray[chunkIndex]) {
+				resultArray[chunkIndex] = []; // start a new chunk
+			}
+			resultArray[chunkIndex].push(item);
+			return resultArray;
+		}, []);
+		const requests = requestsChannels.map((cNames) => axios.get(`/users?login=${cNames.join('&login=')}`, this.requestOptions));
 		return axios
-			.get(`/users?login=${channelNames.join('&login=')}`, this.requestOptions)
-			.then((res) => StorageManagerService.saveUsers(res.data.data || []))
-			.catch((err) => {
+			.all(requests)
+			.then(
+				axios.spread((...responses) => {
+					const channels = responses.reduce((array, item, index) => array.concat(item.data.data || []), []);
+					return StorageManagerService.saveUsers(channels);
+				})
+			)
+			.catch((errors) => {
+				const err = errors[0] ? errors[0] : errors;
 				if (err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchUsers(channelNames));
 				} else {
-					this.handleError(err);
+					this.handleApiError(err);
 				}
 			});
 	}
 
 	static fetchStreams(channelNames) {
+		const maxPerRequest = 100;
+		const requestsChannels = channelNames.reduce((resultArray, item, index) => {
+			const chunkIndex = Math.floor(index / maxPerRequest);
+			if (!resultArray[chunkIndex]) {
+				resultArray[chunkIndex] = []; // start a new chunk
+			}
+			resultArray[chunkIndex].push(item);
+			return resultArray;
+		}, []);
+		const requests = requestsChannels.map((cNames) => axios.get(`/streams?user_login=${cNames.join('&user_login=')}`, this.requestOptions));
 		return axios
-			.get(`/streams?user_login=${channelNames.join('&user_login=')}`, this.requestOptions)
-			.then((res) => StorageManagerService.saveStreams(res.data.data || []))
-			.catch((err) => {
+			.all(requests)
+			.then(
+				axios.spread((...responses) => {
+					const streams = responses.reduce((array, item, index) => array.concat(item.data.data || []), []);
+					return StorageManagerService.saveStreams(streams);
+				})
+			)
+			.catch((errors) => {
+				const err = errors[0] ? errors[0] : errors;
 				if (err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchStreams(channelNames));
 				} else {
-					this.handleError(err);
+					this.handleApiError(err);
 				}
 			});
 	}
