@@ -16,7 +16,9 @@
     along with this program.  If not, see <https://github.com/pvillaverde/twitch-data-exporter/blob/master/LICENSE>.
 */
 const config = require('../config');
+const moment = require('moment');
 const PostgresqlService = require('./postgresql.service');
+const FileDatabaseService = require('./fileDatabase.service');
 
 class StorageManagerService {
 	static init() {
@@ -57,6 +59,7 @@ class StorageManagerService {
 
 	handleError(error) {
 		console.error(error);
+		new FileDatabaseService('live-messages').put('last-error', moment());
 	}
 }
 

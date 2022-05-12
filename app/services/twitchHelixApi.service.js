@@ -17,6 +17,8 @@
 */
 const config = require('../config');
 const fs = require('fs');
+const moment = require('moment');
+const FileDatabaseService = require('./fileDatabase.service');
 const { default: axios } = require('axios');
 const StorageManagerService = require('./storageManager.service.js');
 class TwitchHelixApiService {
@@ -47,6 +49,7 @@ class TwitchHelixApiService {
 
 	static handleError(error) {
 		console.error('[TwitchHelixApiService]', error);
+		new FileDatabaseService('live-messages').put('last-error', moment());
 		return;
 	}
 
@@ -87,7 +90,7 @@ class TwitchHelixApiService {
 				if (err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchUsers(channelNames));
 				} else {
-					this.handleApiError(err);
+					this.handleError(err);
 				}
 			});
 	}
@@ -116,7 +119,7 @@ class TwitchHelixApiService {
 				if (err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchStreams(channelNames));
 				} else {
-					this.handleApiError(err);
+					this.handleError(err);
 				}
 			});
 	}

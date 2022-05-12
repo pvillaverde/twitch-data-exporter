@@ -18,6 +18,8 @@
 const { Pool, Client } = require('pg'); // https://node-postgres.com/
 const config = require('../config');
 const fs = require('fs');
+const moment = require('moment');
+const FileDatabaseService = require('./fileDatabase.service');
 class PostgresqlService {
 	static async init() {
 		const connectionString = config.storageConfig[config.storage].connectionString;
@@ -150,6 +152,7 @@ class PostgresqlService {
 
 	handleError(error) {
 		console.error(error);
+		new FileDatabaseService('live-messages').put('last-error', moment());
 	}
 }
 
