@@ -10,4 +10,7 @@ RUN mkdir -p /opt/twitch-data-exporter && cp -a /tmp/node_modules /opt/twitch-da
 WORKDIR /opt/twitch-data-exporter
 ADD . /opt/twitch-data-exporter
 
+HEALTHCHECK --interval=10s --timeout=3s --start-period=30s \
+      CMD node app/healthcheck.js
+
 CMD [ "node", "app/index.js" ]
