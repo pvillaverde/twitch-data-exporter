@@ -87,7 +87,7 @@ class TwitchHelixApiService {
 			)
 			.catch((errors) => {
 				const err = errors[0] ? errors[0] : errors;
-				if (err.response.status === 401) {
+				if (err.response && err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchUsers(channelNames));
 				} else {
 					this.handleError(err);
@@ -116,7 +116,7 @@ class TwitchHelixApiService {
 			)
 			.catch((errors) => {
 				const err = errors[0] ? errors[0] : errors;
-				if (err.response.status === 401) {
+				if (err.response && err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchStreams(channelNames));
 				} else {
 					this.handleError(err);
@@ -129,7 +129,7 @@ class TwitchHelixApiService {
 			.get(`/games?id=${gameIds.join('&id=')}`, this.requestOptions)
 			.then((res) => StorageManagerService.saveGames(res.data.data || []))
 			.catch((err) => {
-				if (err.response.status === 401) {
+				if (err.response && err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchGames(gameIds));
 				} else {
 					this.handleError(err);
@@ -150,7 +150,7 @@ class TwitchHelixApiService {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 401) {
+				if (err.response && err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchFollows(channelId));
 				} else {
 					this.handleError(err);
@@ -171,7 +171,7 @@ class TwitchHelixApiService {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 401) {
+				if (err.response && err.response.status === 401) {
 					return this.getAccessToken().then((token) => this.fetchClips(broadcasterId));
 				} else {
 					this.handleError(err);
