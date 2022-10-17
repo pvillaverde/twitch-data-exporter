@@ -68,7 +68,7 @@ class CronService {
 	static async fetchStreams() {
 		if(!this.channelNames.length) return;
 		TwitchHelixApiService.fetchStreams(this.channelNames).then((streams) => {
-			if (streams.length)
+			if (streams && streams.length)
 				console.log(new Date().toISOString(), '[CronService]', 'Actualizados Streamings', streams.map((s) => s.user_name).join(','));
 		});
 	}
